@@ -134,4 +134,35 @@ function render(){
     wrap.appendChild(card);
   });
 }
+
+/* ===== вкладка «Размеры» ===== */
+let SZBRAND="nike";
+const SZTABS=[["nike","Nike / Jordan"],["anta","Anta"],["lining","Li-Ning"],["mizuno","Mizuno"]];
+function buildBrandTabs(){
+  const f=$("#brandtabs"); f.innerHTML="";
+  SZTABS.forEach(([k,label])=>{ const el=document.createElement("button");
+    el.className="chip"+(k===SZBRAND?" active":""); el.textContent=label;
+    el.onclick=()=>{SZBRAND=k;[...f.children].forEach(c=>c.classList.remove("active"));el.classList.add("active");renderSizes();};
+    f.appendChild(el); });
+}
+function renderSizes(){
+  const grid=GRIDS[SZBRAND]||GRIDS.default;
+  const cmv=parseFloat(String($("#cm").value||"").replace(",","."));
+  let hl=-1;
+  if(cmv){ hl=grid.findIndex(r=>r[2]>=cmv-0.01); if(hl<0) hl=grid.length-1; }
+  $("#sztbody").innerHTML=grid.map((r,i)=>`<tr class="${i===hl?'hl':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]} см</td></tr>`).join("");
+  const res=$("#szresult");
+  if(cmv&&hl>=0){ const r=grid[hl]; res.style.display="block"; res.innerHTML=`Длина стопы <b>${String(cmv).replace(".",",")} см</b> → твой размер: <b>EU ${r[0]} · US ${r[1]}</b>`; }
+  else res.style.display="none";
+}
+function initTabs(){
+  document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active")); t.classList.add("active");
+    const v=t.dataset.v;
+    $("#catalog").style.display = v==="catalog"?"":"none";
+    $("#sizes").style.display   = v==="sizes"?"":"none";
+  });
+  $("#cm").addEventListener("input",renderSizes);
+}
+initTabs(); buildBrandTabs(); renderSizes();
 load();
