@@ -42,15 +42,21 @@ const splitSizes = s => (Array.isArray(s)?s.join(","):(s||"")).split(/[,;/]+/).m
 const isNumSize = t => /^\d{2}([.,]\d)?(\s?eu)?$/i.test(String(t).replace(",","."));
 const euNorm = t => String(t).replace(",",".").replace(/\s?eu/i,"").trim();
 
+const cz = x => String(Math.round(x*2)/2).replace(".",",");   // округл. до 0,5 + запятая
 function convert(val, key){
   const grid = GRIDS[key] || GRIDS.default;
   const n = parseFloat(euNorm(val));
   if(!n) return {eu:String(val), us:"", cm:""};
-  const col = n < 37 ? 2 : 0;   // <37 → это длина стопы (см), иначе EU
-  let best=null, bd=1e9;
-  grid.forEach(r=>{ const d=Math.abs(parseFloat(r[col])-n); if(d<bd){bd=d;best=r;} });
-  if(best && bd<=0.4) return {eu:best[0], us:best[1], cm:best[2]};
-  return col===2 ? {eu:"", us:"", cm:String(n).replace(".",",")} : {eu:String(n).replace(".",","), us:"", cm:""};
+  const col = n < 37 ? 2 : 0;   // <37 → длина стопы (см), иначе EU
+  const rows = grid.map(r=>({eu:parseFloat(r[0]),us:parseFloat(r[1]),cm:r[2],k:parseFloat(r[col])})).sort((a,b)=>a.k-b.k);
+  const ex = rows.find(r=>Math.abs(r.k-n)<=0.25);
+  if(ex) return {eu:cz(ex.eu), us:cz(ex.us), cm:cz(ex.cm)};
+  let lo=null,hi=null; rows.forEach(r=>{ if(r.k<=n)lo=r; if(r.k>=n&&!hi)hi=r; });
+  if(lo&&hi&&hi.k!==lo.k){ const t=(n-lo.k)/(hi.k-lo.k);
+    return {eu: col===0?cz(n):cz(lo.eu+(hi.eu-lo.eu)*t), us:cz(lo.us+(hi.us-lo.us)*t), cm:cz(lo.cm+(hi.cm-lo.cm)*t)}; }
+  const nr=lo||hi;
+  if(nr) return {eu: col===0?cz(n):cz(nr.eu), us:cz(nr.us), cm:cz(nr.cm)};
+  return {eu:cz(n), us:"", cm:""};
 }
 
 /* фото по модели+цвету (привязываю я; в таблице колонку ФОТО можно не заполнять) */
