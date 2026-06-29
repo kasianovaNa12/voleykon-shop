@@ -2,8 +2,8 @@
    Карточки группируются по модель+бренд+цвет → если одна модель/цвет в разных размерах,
    показывается выбор размера. В заказ уходит модель, бренд, цвет, размер и ссылка на фото. */
 const MANAGER = "offangle1";
-// Когда опубликуешь Google-таблицу как CSV — вставь сюда ссылку:
-const SHEET_CSV_URL = "";
+// Google-таблица (опубликованный CSV) — твой self-service источник:
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQij-lusvUZ3fYANfXCwtnYeSayYkOjnI3fEjNuiUMHSB-3R9d41PztPsn_gLZuDT91bo0cBhis92Zy/pub?gid=0&single=true&output=csv";
 
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
 if (tg) { try { tg.ready(); tg.expand(); } catch(e){} }
