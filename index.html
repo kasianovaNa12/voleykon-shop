@@ -16,11 +16,31 @@
     <div class="logo" style="background-image:url('images/logo.png')"></div>
     <div>
       <h1>ВОЛЕЙКОН · ВИТРИНА</h1>
-      <div class="sub">оригинал с Poizon · волейбол и баскет · заказ в ЛС</div>
+      <div class="sub">оригинал с Poizon · размеры EU/US/см · заказ в ЛС</div>
     </div>
   </div>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
+
+  <div class="tabs">
+    <button class="tab active" data-v="catalog">🛍 Каталог</button>
+    <button class="tab" data-v="sizes">📏 Размеры</button>
+  </div>
+
+  <div id="catalog" class="view">
+    <div class="filters" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div id="sizes" class="view" style="display:none">
+    <div class="sztip">📏 <b>Как узнать свой размер.</b> Встань пяткой к стене, поставь стопу на лист, отметь кончик большого пальца и измерь расстояние в см. Это самый точный способ — ищи свою длину стопы в таблице бренда.</div>
+    <input id="cm" type="number" inputmode="decimal" step="0.1" placeholder="Введи длину стопы, см — напр. 27.5">
+    <div id="szresult" class="szresult" style="display:none"></div>
+    <div class="filters" id="brandtabs"></div>
+    <table class="sztable">
+      <thead><tr><th>EU</th><th>US</th><th>Длина стопы</th></tr></thead>
+      <tbody id="sztbody"></tbody>
+    </table>
+    <div class="szhint">Если между размерами — бери больший. Сомневаешься — напиши нам, поможем подобрать.</div>
+  </div>
 </div>
 <div class="foot">
   <a class="cta" href="https://t.me/offangle1" target="_blank">Задать вопрос → @offangle1</a>
