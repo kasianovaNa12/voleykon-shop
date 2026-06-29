@@ -40,8 +40,12 @@ html,body{margin:0;background:var(--bg);color:var(--txt);
 .info{padding:11px 12px 13px;display:flex;flex-direction:column;gap:3px;flex:1}
 .model{font-family:Oswald,sans-serif;font-weight:700;font-size:16px;line-height:1.1}
 .cw{color:var(--mut);font-size:12px}
-.sz{font-size:12.5px;margin-top:4px}
-.sz b{color:var(--lime)}
+.szlabel{font-size:12.5px;color:var(--mut);margin-top:6px}
+.szlabel.under{color:var(--orange);font-weight:700;font-family:Oswald,sans-serif}
+.szrow{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.szchip{border:1px solid var(--line);background:var(--card2);color:#fff;font-family:Oswald,sans-serif;
+  font-weight:600;font-size:13px;padding:6px 11px;border-radius:9px;cursor:pointer}
+.szchip.sel{background:var(--lime);color:#0E0E10;border-color:var(--lime)}
 .note{color:var(--mut);font-size:11px;margin-top:auto;padding-top:6px}
 .buy{margin-top:9px;border:0;background:var(--orange);color:#0E0E10;
   font-family:Oswald,sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;
