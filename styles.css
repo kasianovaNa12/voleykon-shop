@@ -1,0 +1,56 @@
+:root{
+  --bg:#0E0E10; --card:#16161A; --card2:#1d1d22; --line:#2a2a30;
+  --txt:#ffffff; --mut:#9a9aa2; --lime:#C6FF00; --orange:#FF6A2B; --tg:#229ED9;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);
+  font-family:"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:780px;margin:0 auto;padding:14px 14px 90px}
+
+/* header */
+.head{display:flex;align-items:center;gap:12px;padding:6px 2px 14px}
+.head .logo{width:46px;height:46px;border-radius:50%;background:#fff;flex:0 0 auto;
+  background-size:cover;background-position:center}
+.head h1{font-family:Oswald,sans-serif;font-weight:700;letter-spacing:1px;font-size:24px;margin:0}
+.head .sub{color:var(--mut);font-size:12px;margin-top:2px;letter-spacing:.3px}
+
+/* filters */
+.filters{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--txt);
+  font-family:Oswald,sans-serif;font-weight:600;font-size:14px;letter-spacing:.5px;
+  padding:9px 16px;border-radius:22px;cursor:pointer;white-space:nowrap;transition:.15s}
+.chip.active{background:var(--lime);color:#0E0E10;border-color:var(--lime)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:560px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;transition:.15s}
+.card:active{transform:scale(.985)}
+.ph{position:relative;background:#fff;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.ph img{width:100%;height:100%;object-fit:contain}
+.badge{position:absolute;top:8px;left:8px;font-family:Oswald,sans-serif;font-weight:700;
+  font-size:11px;letter-spacing:.5px;padding:5px 10px;border-radius:20px;text-transform:uppercase}
+.badge.in{background:var(--lime);color:#0E0E10}
+.badge.order{background:var(--orange);color:#0E0E10}
+.brand{position:absolute;top:8px;right:8px;background:rgba(14,14,16,.78);color:#fff;
+  font-family:Oswald,sans-serif;font-weight:600;font-size:11px;letter-spacing:.5px;
+  padding:5px 9px;border-radius:20px}
+.info{padding:11px 12px 13px;display:flex;flex-direction:column;gap:3px;flex:1}
+.model{font-family:Oswald,sans-serif;font-weight:700;font-size:16px;line-height:1.1}
+.cw{color:var(--mut);font-size:12px}
+.sz{font-size:12.5px;margin-top:4px}
+.sz b{color:var(--lime)}
+.note{color:var(--mut);font-size:11px;margin-top:auto;padding-top:6px}
+.buy{margin-top:9px;border:0;background:var(--orange);color:#0E0E10;
+  font-family:Oswald,sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;
+  padding:11px;border-radius:12px;cursor:pointer;width:100%}
+.buy:active{filter:brightness(.92)}
+
+.empty{color:var(--mut);text-align:center;padding:50px 10px;font-size:15px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(#0E0E1000,#0E0E10 38%);
+  padding:14px;text-align:center}
+.foot .cta{display:inline-block;background:var(--tg);color:#fff;text-decoration:none;
+  font-family:Oswald,sans-serif;font-weight:700;font-size:15px;letter-spacing:.5px;
+  padding:13px 26px;border-radius:26px}
