@@ -1,0 +1,26 @@
+[
+  {
+    "id": "jordan-jumpman-2021-grape",
+    "model": "Jordan Jumpman 2021",
+    "brand": "Jordan",
+    "sport": "basket",
+    "colorway": "«Grape» бело-фиолетовая",
+    "sizes": "44,5 EU (28,5 см)",
+    "price": "",
+    "stock": "в наличии",
+    "img": "images/jordan.jpg",
+    "note": "Zoom Air, оригинал с Poizon"
+  },
+  {
+    "id": "lining-wow10-white-hot",
+    "model": "Li-Ning Way of Wade 10",
+    "brand": "Li-Ning",
+    "sport": "basket",
+    "colorway": "White Hot",
+    "sizes": "под заказ — любой",
+    "price": "",
+    "stock": "под заказ",
+    "img": "images/wow10.jpg",
+    "note": "BOOM-амортизация, флагман Уэйда"
+  }
+]
