@@ -54,6 +54,24 @@ html,body{margin:0;background:var(--bg);color:var(--txt);
   padding:11px;border-radius:12px;cursor:pointer;width:100%}
 .buy:active{filter:brightness(.92)}
 
+.tabs{display:flex;gap:8px;padding:2px 2px 14px}
+.tab{flex:1;border:1px solid var(--line);background:var(--card);color:#fff;font-family:Oswald,sans-serif;
+  font-weight:600;font-size:16px;letter-spacing:.5px;padding:12px;border-radius:14px;cursor:pointer}
+.tab.active{background:#fff;color:#0E0E10;border-color:#fff}
+.sztip{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;
+  font-size:13.5px;line-height:1.45;color:#dcdce2;margin-bottom:12px}
+#cm{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;color:#fff;
+  font-size:16px;padding:14px;margin-bottom:12px;font-family:inherit;outline:none}
+#cm:focus{border-color:var(--lime)}
+.szresult{background:var(--lime);color:#0E0E10;border-radius:12px;padding:12px 15px;font-size:15px;
+  margin-bottom:12px;font-family:Oswald,sans-serif}
+.sztable{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden}
+.sztable th,.sztable td{padding:12px 8px;text-align:center;font-size:15.5px;border-bottom:1px solid var(--line)}
+.sztable th{font-family:Oswald,sans-serif;font-weight:600;color:var(--mut);font-size:12.5px;letter-spacing:.8px}
+.sztable tr:last-child td{border-bottom:0}
+.sztable tr.hl td{background:var(--lime);color:#0E0E10;font-weight:700}
+.szhint{color:var(--mut);font-size:12.5px;text-align:center;padding:14px 8px 0;line-height:1.4}
 .empty{color:var(--mut);text-align:center;padding:50px 10px;font-size:15px}
 .foot{position:fixed;left:0;right:0;bottom:0;background:linear-gradient(#0E0E1000,#0E0E10 38%);
   padding:14px;text-align:center}
