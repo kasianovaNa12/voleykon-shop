@@ -46,6 +46,8 @@ html,body{margin:0;background:var(--bg);color:var(--txt);
 .szchip{border:1px solid var(--line);background:var(--card2);color:#fff;font-family:Oswald,sans-serif;
   font-weight:600;font-size:13px;padding:6px 11px;border-radius:9px;cursor:pointer}
 .szchip.sel{background:var(--lime);color:#0E0E10;border-color:var(--lime)}
+.szconv{margin-top:8px;font-family:Oswald,sans-serif;font-weight:600;font-size:14px;color:var(--lime)}
+.gridnote{margin-top:2px;font-size:10.5px;color:var(--mut)}
 .note{color:var(--mut);font-size:11px;margin-top:auto;padding-top:6px}
 .buy{margin-top:9px;border:0;background:var(--orange);color:#0E0E10;
   font-family:Oswald,sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;
