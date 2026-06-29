@@ -7,17 +7,29 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQij-lusv
 /* Размерные сетки (мужские, см = длина стопы). По вводу EU показываем US и см. */
 const GRIDS = {
   nike: [["38.5","6",24],["39","6.5",24.5],["40","7",25],["40.5","7.5",25.5],["41","8",26],["42","8.5",26.5],["42.5","9",27],["43","9.5",27.5],["44","10",28],["44.5","10.5",28.5],["45","11",29],["45.5","11.5",29.5],["46","12",30],["47","12.5",30.5],["47.5","13",31]],
+  asics: [["40","7",25],["41","7.5",25.5],["41.5","8",26],["42","8.5",26.5],["42.5","9",27],["43","9.5",27.5],["44","10",28],["44.5","10.5",28.5],["45","11",29],["45.5","11.5",29.5],["46","12",30]],
+  puma: [["38","6",24],["39","7",25],["40","7.5",25.5],["41","8.5",26.5],["42","9",27],["43","10",28],["44","10.5",28.5],["45","11.5",29.5],["46","12",30]],
   anta: [["39","6.5",24.5],["40","7",25],["41","8",25.5],["42","8.5",26],["42.5","9",26.5],["43","9.5",27],["44","10",27.5],["44.5","10.5",28],["45","11",28.5],["46","12",29],["47","13",30]],
   lining: [["38.5","6",23.5],["39","6.5",24],["40","7",24.5],["40.5","7.5",25],["41","8",25.5],["42","8.5",26],["42.5","9",26.5],["43","9.5",27],["44","10",27.5],["44.5","10.5",28],["45","11",28.5],["46","11.5",29]],
   mizuno: [["38","7.5",24],["38.5","8",24.5],["39.5","8.5",25],["40","9",25.5],["40.5","9.5",26],["41","10",26.5],["42","10.5",27],["42.5","11",27.5],["43","11.5",28],["44","12",28.5],["44.5","12.5",29]]
 };
-const GRID_NAME = {nike:"Nike / Jordan", anta:"Anta", lining:"Li-Ning", mizuno:"Mizuno", default:"стандарт"};
 GRIDS.default = GRIDS.nike;
-function brandKey(b){ b=(b||"").toLowerCase().replace(/[\s\-_'’]/g,"");
+GRIDS.adidas = GRIDS.nike; GRIDS.ua = GRIDS.nike; GRIDS.newbalance = GRIDS.nike;   // true-to-size, как Nike
+GRIDS.peak = GRIDS.anta; GRIDS["361"] = GRIDS.anta; GRIDS.xtep = GRIDS.anta;        // китайские, малят как Anta
+const GRID_NAME = {nike:"Nike / Jordan", adidas:"Adidas", asics:"Asics", puma:"Puma", ua:"Under Armour", newbalance:"New Balance", anta:"Anta", peak:"Peak", "361":"361°", xtep:"Xtep", lining:"Li-Ning", mizuno:"Mizuno", default:"стандарт"};
+function brandKey(b){ b=(b||"").toLowerCase().replace(/[\s\-_'’°]/g,"");
   if(/jordan|nike/.test(b)) return "nike";
+  if(/adidas/.test(b)) return "adidas";
+  if(/asics/.test(b)) return "asics";
+  if(/puma/.test(b)) return "puma";
+  if(/underarmour|curry|^ua$/.test(b)) return "ua";
+  if(/newbalance|^nb$/.test(b)) return "newbalance";
   if(/lining|wayofwade|wow/.test(b)) return "lining";
-  if(/anta|peak|361|kai|kt/.test(b)) return "anta";
   if(/mizuno/.test(b)) return "mizuno";
+  if(/361/.test(b)) return "361";
+  if(/xtep/.test(b)) return "xtep";
+  if(/peak/.test(b)) return "peak";
+  if(/anta|kai|kt/.test(b)) return "anta";
   return "default"; }
 
 const tg = window.Telegram && window.Telegram.WebApp ? window.Telegram.WebApp : null;
@@ -137,7 +149,7 @@ function render(){
 
 /* ===== вкладка «Размеры» ===== */
 let SZBRAND="nike";
-const SZTABS=[["nike","Nike / Jordan"],["anta","Anta"],["lining","Li-Ning"],["mizuno","Mizuno"]];
+const SZTABS=[["nike","Nike / Jordan"],["adidas","Adidas"],["asics","Asics"],["puma","Puma"],["ua","Under Armour"],["newbalance","New Balance"],["mizuno","Mizuno"],["lining","Li-Ning"],["anta","Anta"],["peak","Peak"],["361","361°"],["xtep","Xtep"]];
 function buildBrandTabs(){
   const f=$("#brandtabs"); f.innerHTML="";
   SZTABS.forEach(([k,label])=>{ const el=document.createElement("button");
