@@ -42,14 +42,29 @@ const splitSizes = s => (Array.isArray(s)?s.join(","):(s||"")).split(/[,;/]+/).m
 const isNumSize = t => /^\d{2}([.,]\d)?(\s?eu)?$/i.test(String(t).replace(",","."));
 const euNorm = t => String(t).replace(",",".").replace(/\s?eu/i,"").trim();
 
-function convert(eu, key){
+function convert(val, key){
   const grid = GRIDS[key] || GRIDS.default;
-  const e = parseFloat(euNorm(eu));
+  const n = parseFloat(euNorm(val));
+  if(!n) return {eu:String(val), us:"", cm:""};
+  const col = n < 37 ? 2 : 0;   // <37 → это длина стопы (см), иначе EU
   let best=null, bd=1e9;
-  grid.forEach(r=>{ const d=Math.abs(parseFloat(r[0])-e); if(d<bd){bd=d;best=r;} });
-  if(best && bd<=0.4) return {eu:euNorm(eu).replace(".",","), us:best[1], cm:best[2]};
-  return {eu:euNorm(eu).replace(".",","), us:"", cm:""};
+  grid.forEach(r=>{ const d=Math.abs(parseFloat(r[col])-n); if(d<bd){bd=d;best=r;} });
+  if(best && bd<=0.4) return {eu:best[0], us:best[1], cm:best[2]};
+  return col===2 ? {eu:"", us:"", cm:String(n).replace(".",",")} : {eu:String(n).replace(".",","), us:"", cm:""};
 }
+
+/* фото по модели+цвету (привязываю я; в таблице колонку ФОТО можно не заполнять) */
+const norm = s => (s||"").toLowerCase().replace(/[^a-zа-яё0-9]/gi,"");
+const PHOTOS = {
+  "wayofwade10|caution":"images/wow10-caution.jpg",
+  "wayofwade10|wasabi":"images/wow10-wasabi.jpg",
+  "wayofwade10|sunshinestate":"images/wow10-sunshine.jpg",
+  "wayofwade10|announcement":"images/wow10-announcement.jpg",
+  "airzoomgtjump2|greaterthanever":"images/gtjump2-greater.jpg",
+  "allcity12encore|avocado":"images/allcity12-avocado.jpg",
+  "ja3|turbogreen":"images/ja3-turbogreen.jpg",
+  "skyeliteffmt3|novaorange":"images/asics-skyelite.jpg"
+};
 
 function parseCSV(text){
   const rows=[]; let i=0,f="",row=[],q=false;
@@ -87,8 +102,9 @@ async function load(){
     if(!g.img&&p.img) g.img=p.img; if(!g.note&&p.note) g.note=p.note;
   });
   GROUPS=[...map.values()].map(g=>{ const key=brandKey(g.brand);
-    const sizes=[...g._eu].sort((a,b)=>parseFloat(a)-parseFloat(b)).map(eu=>convert(eu,key));
-    return {...g, key, gridName:GRID_NAME[key]||GRID_NAME.default, sizes}; });
+    const sizes=[...g._eu].sort((a,b)=>parseFloat(a)-parseFloat(b)).map(v=>convert(v,key));
+    let img=g.img; if(!img||/^https?:\/\/dw4\.co/i.test(img)){ const pk=norm(g.model)+"|"+norm(g.colorway); img=PHOTOS[pk]||PHOTOS[norm(g.model)]||""; }
+    return {...g, img, key, gridName:GRID_NAME[key]||GRID_NAME.default, sizes}; });
   buildFilters(); render();
 }
 
