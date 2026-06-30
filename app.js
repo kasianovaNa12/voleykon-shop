@@ -62,6 +62,7 @@ function convert(val, key){
 /* фото по модели+цвету (привязываю я; в таблице колонку ФОТО можно не заполнять) */
 const norm = s => (s||"").toLowerCase().replace(/[^a-zа-яё0-9]/gi,"");
 const PHOTOS = {
+  "jumpman2021|grape":"images/jordan.jpg",
   "wayofwade10|caution":"images/wow10-caution.jpg",
   "wayofwade10|wasabi":"images/wow10-wasabi.jpg",
   "wayofwade10|sunshinestate":"images/wow10-sunshine.jpg",
